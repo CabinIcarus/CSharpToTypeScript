@@ -10,9 +10,8 @@ namespace CSharpToTypeScript.Core.Options
             bool useKebabCase = false, bool appendModelSuffix = false, QuotationMark quotationMark = QuotationMark.Double,
             bool appendNewLine = false, bool stringEnums = false, bool enumStringToCamelCase = false,
             OutputType outputType = OutputType.Interface)
-        : base(useKebabCase, appendModelSuffix, removeInterfacePrefix)
+        : base(keyword,useKebabCase, appendModelSuffix, removeInterfacePrefix)
         {
-            Keyword = keyword;
             UseTabs = useTabs;
             TabSize = tabSize;
             ConvertDatesTo = convertDatesTo;
@@ -26,7 +25,6 @@ namespace CSharpToTypeScript.Core.Options
             OutputType = outputType;
         }
 
-        public KeywordType Keyword { get; set; }
         public bool UseTabs { get; set; }
         public int? TabSize { get; set; }
         public DateOutputType ConvertDatesTo { get; set; }

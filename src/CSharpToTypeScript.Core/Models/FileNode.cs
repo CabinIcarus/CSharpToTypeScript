@@ -35,7 +35,7 @@ namespace CSharpToTypeScript.Core.Models
                 // types
                 + RootNodes.WriteTypeScript(options, context).ToEmptyLineSeparatedList()
                 // empty line at the end
-                + NewLine.If(options.AppendNewLine);
+                + NewLine.If(options.AppendNewLine).If(options.Keyword != KeywordType.Declare);
         }
     }
 }

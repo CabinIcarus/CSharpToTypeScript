@@ -7,6 +7,6 @@ namespace CSharpToTypeScript.Core.Services
     internal class FileNameConverter : IFileNameConverter
     {
         public string ConvertToTypeScript(string fileName, ModuleNameConversionOptions options)
-            => ModuleNameTransformation.Transform(Path.GetFileNameWithoutExtension(fileName), options) + ".ts";
+            => ModuleNameTransformation.Transform(Path.GetFileNameWithoutExtension(fileName), options) + (options.Keyword == KeywordType.Declare ? ".d.ts" : ".ts");
     }
 }
