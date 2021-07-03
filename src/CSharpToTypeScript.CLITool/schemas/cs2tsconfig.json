@@ -29,10 +29,15 @@
             "minimum": 1,
             "default": 4
         },
-        "skipExport": {
-            "description": "Skip 'export' keyword.",
-            "type": "boolean",
-            "default": false
+        "keywordType": {
+            "description": "Declaration Type keyword",
+            "type": "string",
+            "enum": [
+                "Private",
+                "Export",
+                "Declare"
+            ],
+            "default": "Declare"
         },
         "useKebabCase": {
             "description": "Use kebab case for output file names.",
