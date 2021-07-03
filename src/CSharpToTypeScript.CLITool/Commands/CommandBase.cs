@@ -24,8 +24,8 @@ namespace CSharpToTypeScript.CLITool.Commands
         [Option(ShortName = "ts", Description = "Number of spaces per tab")]
         public int TabSize { get; set; } = 4;
 
-        [Option(ShortName = "se", Description = "Skip 'export' keyword")]
-        public bool SkipExport { get; set; }
+        [Option(ShortName = "se", Description = "Declaration Type keyword")]
+        public KeywordType KeywordType { get; set; }
 
         [Option(ShortName = "k", Description = "Use kebab case for output file names")]
         public bool UseKebabCase { get; set; }
