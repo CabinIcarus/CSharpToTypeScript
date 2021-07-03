@@ -38,7 +38,8 @@ namespace CSharpToTypeScript.Core.Models
             context.GenericTypeParameters = GenericTypeParameters;
 
             // keywords
-            return "export ".If(options.Export)
+            return 
+                options.GetKeyword() + " ".If(options.Keyword != KeywordType.Private)
                 // type
                 + (!FromInterface && options.OutputType == OutputType.Class ? "class" : "interface") + " "
                 // name

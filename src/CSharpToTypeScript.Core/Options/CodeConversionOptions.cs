@@ -1,8 +1,10 @@
+using System;
+
 namespace CSharpToTypeScript.Core.Options
 {
     public class CodeConversionOptions : ModuleNameConversionOptions
     {
-        public CodeConversionOptions(bool export, bool useTabs, int? tabSize = null,
+        public CodeConversionOptions(KeywordType keyword, bool useTabs, int? tabSize = null,
             DateOutputType convertDatesTo = DateOutputType.String, NullableOutputType convertNullablesTo = NullableOutputType.Null,
             bool toCamelCase = true, bool removeInterfacePrefix = true, ImportGenerationMode importGenerationMode = ImportGenerationMode.None,
             bool useKebabCase = false, bool appendModelSuffix = false, QuotationMark quotationMark = QuotationMark.Double,
@@ -10,7 +12,7 @@ namespace CSharpToTypeScript.Core.Options
             OutputType outputType = OutputType.Interface)
         : base(useKebabCase, appendModelSuffix, removeInterfacePrefix)
         {
-            Export = export;
+            Keyword = keyword;
             UseTabs = useTabs;
             TabSize = tabSize;
             ConvertDatesTo = convertDatesTo;
@@ -24,7 +26,7 @@ namespace CSharpToTypeScript.Core.Options
             OutputType = outputType;
         }
 
-        public bool Export { get; set; }
+        public KeywordType Keyword { get; set; }
         public bool UseTabs { get; set; }
         public int? TabSize { get; set; }
         public DateOutputType ConvertDatesTo { get; set; }
@@ -36,5 +38,24 @@ namespace CSharpToTypeScript.Core.Options
         public bool StringEnums { get; set; }
         public bool EnumStringToCamelCase { get; set; }
         public OutputType OutputType { get; set; }
+
+        public string GetKeyword()
+        {
+            string result;
+            switch (Keyword)
+            {
+                case KeywordType.Private:
+                    result = string.Empty; 
+                    break;
+                case KeywordType.Declare:
+                case KeywordType.Export:
+                    result = Keyword.ToString().ToLower();
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+
+            return result;
+        }
     }
 }
