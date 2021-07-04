@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using CSharpToTypeScript.Core.Options;
@@ -24,6 +25,14 @@ namespace CSharpToTypeScript.Core.Models
         {
             var context = new Context();
 
+            if (options.Keyword == KeywordType.Declare)
+            {
+                return // types
+                    RootNodes.WriteTypeScript(options, context).ToEmptyLineSeparatedList()
+                    // empty line at the end
+                    + NewLine.If(options.AppendNewLine);
+            }
+            
             return // imports
                 (Imports.Select(i =>
                         // type
@@ -35,7 +44,7 @@ namespace CSharpToTypeScript.Core.Models
                 // types
                 + RootNodes.WriteTypeScript(options, context).ToEmptyLineSeparatedList()
                 // empty line at the end
-                + NewLine.If(options.AppendNewLine).If(options.Keyword != KeywordType.Declare);
+                + NewLine.If(options.AppendNewLine);
         }
     }
 }
