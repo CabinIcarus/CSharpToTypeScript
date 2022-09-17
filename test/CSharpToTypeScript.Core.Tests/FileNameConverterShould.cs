@@ -24,7 +24,7 @@ namespace CSharpToTypeScript.Core.Tests
         {
             var converted = _fileNameConverter.ConvertToTypeScript(
                 "MyItemDto.cs",
-                new ModuleNameConversionOptions(useKebabCase: false, appendModelSuffix: false));
+                new ModuleNameConversionOptions(KeywordType.Private, useKebabCase: false, appendModelSuffix: false));
 
             Assert.Equal("myItemDto.ts", converted);
         }
@@ -34,7 +34,7 @@ namespace CSharpToTypeScript.Core.Tests
         {
             var converted = _fileNameConverter.ConvertToTypeScript(
                 "MyProject/DTOs/MyItemDto.cs",
-                new ModuleNameConversionOptions(useKebabCase: false, appendModelSuffix: false));
+                new ModuleNameConversionOptions(KeywordType.Private, useKebabCase: false, appendModelSuffix: false));
 
             Assert.Equal("myItemDto.ts", converted);
         }
@@ -44,7 +44,7 @@ namespace CSharpToTypeScript.Core.Tests
         {
             var converted = _fileNameConverter.ConvertToTypeScript(
                 "MyItemDto.cs",
-                new ModuleNameConversionOptions(useKebabCase: true, appendModelSuffix: false));
+                new ModuleNameConversionOptions(KeywordType.Private, useKebabCase: true, appendModelSuffix: false));
 
             Assert.Equal("my-item-dto.ts", converted);
         }
@@ -54,7 +54,7 @@ namespace CSharpToTypeScript.Core.Tests
         {
             var converted = _fileNameConverter.ConvertToTypeScript(
                 "MyItemDto.cs",
-                new ModuleNameConversionOptions(useKebabCase: false, appendModelSuffix: true));
+                new ModuleNameConversionOptions(KeywordType.Private, useKebabCase: false, appendModelSuffix: true));
 
             Assert.Equal("myItemDto.model.ts", converted);
         }
@@ -64,7 +64,7 @@ namespace CSharpToTypeScript.Core.Tests
         {
             var converted = _fileNameConverter.ConvertToTypeScript(
                 "IMyItemDto.cs",
-                new ModuleNameConversionOptions(useKebabCase: false, appendModelSuffix: true, removeInterfacePrefix: true));
+                new ModuleNameConversionOptions(KeywordType.Private, useKebabCase: false, appendModelSuffix: true, removeInterfacePrefix: true));
 
             Assert.Equal("myItemDto.model.ts", converted);
         }
@@ -74,7 +74,7 @@ namespace CSharpToTypeScript.Core.Tests
         {
             var converted = _fileNameConverter.ConvertToTypeScript(
                 "IMyItemDto.cs",
-                new ModuleNameConversionOptions(useKebabCase: false, appendModelSuffix: true, removeInterfacePrefix: false));
+                new ModuleNameConversionOptions(KeywordType.Private, useKebabCase: false, appendModelSuffix: true, removeInterfacePrefix: false));
 
             Assert.Equal("iMyItemDto.model.ts", converted);
         }

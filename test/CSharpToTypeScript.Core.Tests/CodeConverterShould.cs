@@ -29,7 +29,7 @@ namespace CSharpToTypeScript.Core.Tests
 {
     public int Id { get; set; }
     public string Name { get; set; }
-}", new CodeConversionOptions(export: true, useTabs: false, tabSize: 4));
+}", new CodeConversionOptions(keyword: KeywordType.Export, useTabs: false, tabSize: 4));
 
             Assert.Equal(@"export interface Item {
     id: number;
@@ -44,7 +44,7 @@ namespace CSharpToTypeScript.Core.Tests
 {
     int Id { get; set; }
     string Name { get; set; }
-}", new CodeConversionOptions(export: true, useTabs: false, tabSize: 4));
+}", new CodeConversionOptions(keyword: KeywordType.Export, useTabs: false, tabSize: 4));
 
             Assert.Equal(@"export interface Item {
     id: number;
@@ -58,7 +58,7 @@ namespace CSharpToTypeScript.Core.Tests
             var converted = _codeConverter.ConvertToTypeScript(@"enum Color
 {
     Red, Blue
-}", new CodeConversionOptions(export: true, useTabs: false, tabSize: 4));
+}", new CodeConversionOptions(keyword: KeywordType.Export, useTabs: false, tabSize: 4));
 
             Assert.Equal(@"export enum Color {
     Red,
@@ -73,7 +73,7 @@ namespace CSharpToTypeScript.Core.Tests
 {
     public int Id { get; set; }
     public T SomeT { get; set; }
-}", new CodeConversionOptions(export: true, useTabs: false, tabSize: 4));
+}", new CodeConversionOptions(keyword: KeywordType.Export, useTabs: false, tabSize: 4));
 
             Assert.Equal(@"export interface Item<T> {
     id: number;
@@ -94,7 +94,7 @@ class MyItem : IITem
 {
     public int Id { get; set; }
     public string Name { get; set; }
-}", new CodeConversionOptions(export: true, useTabs: false, tabSize: 4));
+}", new CodeConversionOptions(keyword: KeywordType.Export, useTabs: false, tabSize: 4));
 
             Assert.Equal(@"export interface Item {
     id: number;
@@ -125,7 +125,7 @@ class ImplementingItem : IItem
 {
     public int Id { get; set; }
     private string Name { get; set; }
-}", new CodeConversionOptions(export: true, useTabs: false, tabSize: 4));
+}", new CodeConversionOptions(keyword: KeywordType.Export, useTabs: false, tabSize: 4));
 
             Assert.Equal(@"export interface Item extends ItemInterfaceBase {
     name: string;
@@ -154,7 +154,7 @@ export interface ImplementingItem {
     {
         return 0;
     }
-}", new CodeConversionOptions(export: true, useTabs: false, tabSize: 4));
+}", new CodeConversionOptions(keyword: KeywordType.Export, useTabs: false, tabSize: 4));
 
             Assert.Equal(@"export interface Item {
     id: number;
@@ -168,7 +168,7 @@ export interface ImplementingItem {
 {
     public int Id { get; set; }
     public string Name { get; set; }
-}", new CodeConversionOptions(export: true, useTabs: false, tabSize: 4));
+}", new CodeConversionOptions(keyword: KeywordType.Export, useTabs: false, tabSize: 4));
 
             Assert.Equal(string.Empty, converted);
         }
@@ -185,7 +185,7 @@ export interface ImplementingItem {
     public DateTime Date { get; set; }
     public Guid Guid { get; set; }
     public bool Boolean { get; set; } 
-}", new CodeConversionOptions(export: true, useTabs: false, tabSize: 4));
+}", new CodeConversionOptions(keyword: KeywordType.Export, useTabs: false, tabSize: 4));
 
             Assert.Equal(@"export interface Item {
     integer: number;
@@ -204,7 +204,7 @@ export interface ImplementingItem {
             var converted = _codeConverter.ConvertToTypeScript(@"class Item
 {
     public Uri Url { get; set; }
-}", new CodeConversionOptions(export: true, useTabs: false, tabSize: 4));
+}", new CodeConversionOptions(keyword: KeywordType.Export, useTabs: false, tabSize: 4));
 
             Assert.Equal(@"export interface Item {
     url: string;
@@ -220,7 +220,7 @@ export interface ImplementingItem {
     public (int, int, string) TupleA { get; set; }
     public (int id, string name) TupleB { get; set; }
     public Tuple<int, string> TupleC { get; set; }
-}", new CodeConversionOptions(export: true, useTabs: false, tabSize: 4));
+}", new CodeConversionOptions(keyword: KeywordType.Export, useTabs: false, tabSize: 4));
 
             Assert.Equal(@"export interface Item {
     tupleA: { item1: number; item2: number; item3: string; };
@@ -236,7 +236,7 @@ export interface ImplementingItem {
 {
     public Dictionary<string, int> Dict { get; set; }
     public Dictionary<bool, string> IllegalDict { get; set; }
-}", new CodeConversionOptions(export: true, useTabs: false, tabSize: 4));
+}", new CodeConversionOptions(keyword: KeywordType.Export, useTabs: false, tabSize: 4));
 
             Assert.Equal(@"export interface Item {
     dict: { [key: string]: number; };
@@ -252,7 +252,7 @@ export interface ImplementingItem {
     public int[] Array { get; set; }
     public string[,] Array2D { get; set; }
     public IEnumerable<string> Enumerable { get; set; }
-}", new CodeConversionOptions(export: true, useTabs: false, tabSize: 4));
+}", new CodeConversionOptions(keyword: KeywordType.Export, useTabs: false, tabSize: 4));
 
             Assert.Equal(@"export interface Item {
     array: number[];
@@ -269,7 +269,7 @@ export interface ImplementingItem {
     public int? Id { get; set; }
     public IEnumerable<int?> Collection { get; set; }
     public Nullable<float> Generic { get; set; }
-}", new CodeConversionOptions(export: true, useTabs: false, tabSize: 4, default, NullableOutputType.Undefined));
+}", new CodeConversionOptions(keyword: KeywordType.Export, useTabs: false, tabSize: 4, default, NullableOutputType.Undefined));
 
             Assert.Equal(@"export interface Item {
     id?: number;
@@ -284,7 +284,7 @@ export interface ImplementingItem {
             var converted = _codeConverter.ConvertToTypeScript(@"class Item
 {
     public IEnumerable<Dictionary<int, (string, int?)>?>? Wtf { get; set; }
-}", new CodeConversionOptions(export: true, useTabs: false, tabSize: 4));
+}", new CodeConversionOptions(keyword: KeywordType.Export, useTabs: false, tabSize: 4));
 
             Assert.Equal(@"export interface Item {
     wtf: ({ [key: number]: { item1: string; item2: number | null; }; } | null)[] | null;
@@ -300,10 +300,10 @@ export interface ImplementingItem {
 };";
 
             var twoSpaceIndented = _codeConverter.ConvertToTypeScript(
-                code, new CodeConversionOptions(export: true, useTabs: false, tabSize: 2));
+                code, new CodeConversionOptions(keyword: KeywordType.Export, useTabs: false, tabSize: 2));
 
             var tabIndented = _codeConverter.ConvertToTypeScript(
-                code, new CodeConversionOptions(export: true, useTabs: true));
+                code, new CodeConversionOptions(keyword: KeywordType.Export, useTabs: true));
 
             Assert.Equal(@"export interface Item {
   myProperty: number;
@@ -320,7 +320,7 @@ export interface ImplementingItem {
             var converted = _codeConverter.ConvertToTypeScript(@"class Item
 {
     public int Id => 4;
-}", new CodeConversionOptions(export: false, useTabs: false, tabSize: 4));
+}", new CodeConversionOptions(keyword: KeywordType.Private, useTabs: false, tabSize: 4));
 
             Assert.Equal(@"interface Item {
     id: number;
@@ -333,7 +333,7 @@ export interface ImplementingItem {
             var converted = _codeConverter.ConvertToTypeScript(@"class Item
 {
     public DateTime CreatedAt { get; set; }
-}", new CodeConversionOptions(export: false, useTabs: false, tabSize: 4, convertDatesTo: DateOutputType.Date));
+}", new CodeConversionOptions(keyword: KeywordType.Private, useTabs: false, tabSize: 4, convertDatesTo: DateOutputType.Date));
 
             Assert.Equal(@"interface Item {
     createdAt: Date;
@@ -342,7 +342,7 @@ export interface ImplementingItem {
             converted = _codeConverter.ConvertToTypeScript(@"class Item
 {
     public IEnumerable<DateTimeOffset> Dates { get; set; }
-}", new CodeConversionOptions(export: false, useTabs: false, tabSize: 4, convertDatesTo: DateOutputType.Union));
+}", new CodeConversionOptions(keyword: KeywordType.Private, useTabs: false, tabSize: 4, convertDatesTo: DateOutputType.Union));
 
             Assert.Equal(@"interface Item {
     dates: (string | Date)[];
@@ -356,7 +356,7 @@ export interface ImplementingItem {
 {
     public int Id => 4;
     public (int, int) Tuple { get; set; }
-}", new CodeConversionOptions(export: false, useTabs: false, tabSize: 4, toCamelCase: false));
+}", new CodeConversionOptions(keyword: KeywordType.Private, useTabs: false, tabSize: 4, toCamelCase: false));
 
             Assert.Equal(@"interface Item {
     Id: number;
@@ -369,13 +369,13 @@ export interface ImplementingItem {
         {
             const string source = "interface IItem { }";
 
-            var converted = _codeConverter.ConvertToTypeScript(source, new CodeConversionOptions(export: false, useTabs: false, tabSize: 4, toCamelCase: false, removeInterfacePrefix: true));
+            var converted = _codeConverter.ConvertToTypeScript(source, new CodeConversionOptions(keyword: KeywordType.Private, useTabs: false, tabSize: 4, toCamelCase: false, removeInterfacePrefix: true));
 
             Assert.Equal(@"interface Item {
 
 }".NormalizeNewLine(), converted);
 
-            converted = _codeConverter.ConvertToTypeScript(source, new CodeConversionOptions(export: false, useTabs: false, tabSize: 4, toCamelCase: false, removeInterfacePrefix: false));
+            converted = _codeConverter.ConvertToTypeScript(source, new CodeConversionOptions(keyword: KeywordType.Private, useTabs: false, tabSize: 4, toCamelCase: false, removeInterfacePrefix: false));
 
             Assert.Equal(@"interface IItem {
 
@@ -388,7 +388,7 @@ export interface ImplementingItem {
             var converted = _codeConverter.ConvertToTypeScript(@"class Item
 {
     public ImportMe MyProperty { get; set; }
-}", new CodeConversionOptions(export: false, useTabs: true, importGenerationMode: ImportGenerationMode.Simple));
+}", new CodeConversionOptions(keyword: KeywordType.Private, useTabs: true, importGenerationMode: ImportGenerationMode.Simple));
 
             Assert.StartsWith("import { ImportMe } from \"./importMe\";", converted);
         }
@@ -399,7 +399,7 @@ export interface ImplementingItem {
             var converted = _codeConverter.ConvertToTypeScript(@"class Item<T>
 {
     public T MyProperty { get; set; }
-}", new CodeConversionOptions(export: false, useTabs: true, importGenerationMode: ImportGenerationMode.Simple));
+}", new CodeConversionOptions(keyword: KeywordType.Private, useTabs: true, importGenerationMode: ImportGenerationMode.Simple));
 
             Assert.DoesNotContain("import { T }", converted);
         }
@@ -410,7 +410,7 @@ export interface ImplementingItem {
             var converted = _codeConverter.ConvertToTypeScript(@"class Item
 {
     public ImportMe MyProperty { get; set; }
-}", new CodeConversionOptions(export: false, useTabs: true, importGenerationMode: ImportGenerationMode.Simple,
+}", new CodeConversionOptions(keyword: KeywordType.Private, useTabs: true, importGenerationMode: ImportGenerationMode.Simple,
             useKebabCase: true, appendModelSuffix: true));
 
             Assert.StartsWith("import { ImportMe } from \"./import-me.model\";", converted);
@@ -422,7 +422,7 @@ export interface ImplementingItem {
             var converted = _codeConverter.ConvertToTypeScript(@"class Item
 {
     public ImportMe MyProperty { get; set; }
-}", new CodeConversionOptions(export: false, useTabs: true,
+}", new CodeConversionOptions(keyword: KeywordType.Private, useTabs: true,
             importGenerationMode: ImportGenerationMode.Simple, quotationMark: QuotationMark.Single));
 
             Assert.StartsWith("import { ImportMe } from './importMe';", converted);
@@ -435,7 +435,7 @@ export interface ImplementingItem {
 {
     public ITest MyProperty { get; set; }
     public Generic<ITest> MyOtherProperty { get; set; }
-}", new CodeConversionOptions(export: false, useTabs: true, removeInterfacePrefix: true));
+}", new CodeConversionOptions(keyword: KeywordType.Private, useTabs: true, removeInterfacePrefix: true));
 
             Assert.Contains("interface Item<ITest>", converted);
             Assert.Contains("myProperty: ITest", converted);
@@ -451,7 +451,7 @@ export interface ImplementingItem {
     public string text;
     public const bool isSomething;
     private string privateField;
-}", new CodeConversionOptions(export: false, useTabs: true));
+}", new CodeConversionOptions(keyword: KeywordType.Private, useTabs: true));
 
             Assert.Contains("publicField: number;", converted);
             Assert.Contains("otherPublicField: number;", converted);
@@ -468,7 +468,7 @@ export interface ImplementingItem {
     public int firstField;
     public int Property { get; set; };
     public int secondField;
-}", new CodeConversionOptions(export: false, useTabs: false, tabSize: 4));
+}", new CodeConversionOptions(keyword: KeywordType.Private, useTabs: false, tabSize: 4));
 
             Assert.Contains(@"firstField: number;
     property: number;
@@ -499,7 +499,7 @@ export interface ImplementingItem {
 
     [JsonIgnore]
     public int someOtherField;
-}", new CodeConversionOptions(export: true, useTabs: false, tabSize: 4));
+}", new CodeConversionOptions(keyword: KeywordType.Export, useTabs: false, tabSize: 4));
 
             Assert.Equal(@"export interface Item {
     id: number;
@@ -533,7 +533,7 @@ export interface ImplementingItem {
 
     [JsonPropertyName(""¯\\_(シ)_/¯"")]
     public string OneMore { get; set; }
-}", new CodeConversionOptions(export: true, useTabs: false, tabSize: 4));
+}", new CodeConversionOptions(keyword: KeywordType.Export, useTabs: false, tabSize: 4));
 
             Assert.Equal(@"export interface Item {
     id: number;
@@ -569,7 +569,7 @@ export interface ImplementingItem {
 
     [JsonProperty(""Text"")]
     public string field;
-}", new CodeConversionOptions(export: true, useTabs: false, tabSize: 4));
+}", new CodeConversionOptions(keyword: KeywordType.Export, useTabs: false, tabSize: 4));
 
             Assert.Equal(@"export interface Item {
     id: number;
@@ -591,7 +591,7 @@ export interface ImplementingItem {
 
     [System.Text.Json.Serialization.JsonIgnore]
     public string LastName { get; set; }
-}", new CodeConversionOptions(export: true, useTabs: false, tabSize: 4));
+}", new CodeConversionOptions(keyword: KeywordType.Export, useTabs: false, tabSize: 4));
 
             Assert.Equal(@"export interface Item {
     first_name: string;
@@ -608,7 +608,7 @@ export interface ImplementingItem {
 
     [JsonPropertyName(""'single'"")]
     public string SomethingElse { get; set; }
-}", new CodeConversionOptions(export: true, useTabs: false, tabSize: 4, quotationMark: QuotationMark.Double));
+}", new CodeConversionOptions(keyword: KeywordType.Export, useTabs: false, tabSize: 4, quotationMark: QuotationMark.Double));
 
             Assert.Equal(@"export interface Item {
     ""\""double\"""": string;
@@ -626,7 +626,7 @@ export interface ImplementingItem {
 
     [JsonPropertyName(""'single'"")]
     public string SomethingElse { get; set; }
-}", new CodeConversionOptions(export: true, useTabs: false, tabSize: 4, quotationMark: QuotationMark.Single));
+}", new CodeConversionOptions(keyword: KeywordType.Export, useTabs: false, tabSize: 4, quotationMark: QuotationMark.Single));
 
             Assert.Equal(@"export interface Item {
     '""double""': string;
@@ -639,7 +639,7 @@ export interface ImplementingItem {
         {
             var converted = _codeConverter.ConvertToTypeScript(
                 "class Item {}",
-                new CodeConversionOptions(export: true, useTabs: true, appendNewLine: true));
+                new CodeConversionOptions(keyword: KeywordType.Export, useTabs: true, appendNewLine: true));
 
             var lastLine = Regex.Split(converted, @"\r?\n").Last();
 
@@ -647,7 +647,7 @@ export interface ImplementingItem {
 
             converted = _codeConverter.ConvertToTypeScript(
                 "class Item {}",
-                new CodeConversionOptions(export: true, useTabs: true, appendNewLine: false));
+                new CodeConversionOptions(keyword: KeywordType.Export, useTabs: true, appendNewLine: false));
 
             lastLine = Regex.Split(converted, @"\r?\n").Last();
 
@@ -663,7 +663,7 @@ export interface ImplementingItem {
     Down,
     Left,
     Right
-}", new CodeConversionOptions(export: false, useTabs: false, tabSize: 4,
+}", new CodeConversionOptions(keyword: KeywordType.Private, useTabs: false, tabSize: 4,
         stringEnums: true, quotationMark: QuotationMark.Single));
 
             Assert.Equal(@"enum Direction {
@@ -683,10 +683,50 @@ export interface ImplementingItem {
     Down,
     Left,
     Right
-}", new CodeConversionOptions(export: false, useTabs: false, tabSize: 4,
+}", new CodeConversionOptions(keyword: KeywordType.Private, useTabs: false, tabSize: 4,
         stringEnums: true, enumStringToCamelCase: true, quotationMark: QuotationMark.Double));
 
             Assert.Equal(@"enum Direction {
+    Up = ""up"",
+    Down = ""down"",
+    Left = ""left"",
+    Right = ""right""
+}".NormalizeNewLine(), converted);
+        }
+        
+        [Fact]
+        public void RespectCamelCaseAndQuotationMarkSettingsForConstStringEnums()
+        {
+            var converted = _codeConverter.ConvertToTypeScript(@"enum Direction
+{
+    Up,
+    Down,
+    Left,
+    Right
+}", new CodeConversionOptions(keyword: KeywordType.Private, useTabs: false, tabSize: 4,
+                stringEnums: true, enumStringToCamelCase: true, quotationMark: QuotationMark.Double,constEnum: true));
+
+            Assert.Equal(@"const enum Direction {
+    Up = ""up"",
+    Down = ""down"",
+    Left = ""left"",
+    Right = ""right""
+}".NormalizeNewLine(), converted);
+        }
+        
+        [Fact]
+        public void RespectCamelCaseAndQuotationMarkSettingsForExportConstStringEnums()
+        {
+            var converted = _codeConverter.ConvertToTypeScript(@"enum Direction
+{
+    Up,
+    Down,
+    Left,
+    Right
+}", new CodeConversionOptions(keyword: KeywordType.Export, useTabs: false, tabSize: 4,
+                stringEnums: true, enumStringToCamelCase: true, quotationMark: QuotationMark.Double,constEnum: true));
+
+            Assert.Equal(@"export const enum Direction {
     Up = ""up"",
     Down = ""down"",
     Left = ""left"",
@@ -698,7 +738,7 @@ export interface ImplementingItem {
         public void ConvertToClasses()
         {
             var converted = _codeConverter.ConvertToTypeScript("class Item { }",
-                new CodeConversionOptions(export: false, useTabs: true, outputType: OutputType.Class));
+                new CodeConversionOptions(keyword: KeywordType.Private, useTabs: true, outputType: OutputType.Class));
 
             Assert.Contains("class", converted);
             Assert.DoesNotContain("interface", converted);
