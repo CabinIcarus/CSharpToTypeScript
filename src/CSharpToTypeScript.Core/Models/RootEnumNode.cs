@@ -18,9 +18,12 @@ namespace CSharpToTypeScript.Core.Models
         public IEnumerable<EnumMemberNode> Members { get; }
 
         public override string WriteTypeScript(CodeConversionOptions options, Context context)
-            =>  
+            =>
             // keywords
-            options.GetKeyword() + " ".If(options.Keyword != KeywordType.Private) + "enum "                                             
+            options.GetKeyword() + " ".If(options.Keyword != KeywordType.Private) 
+            // const enum
+            + "const ".If(options.ConstEnum)
+            + "enum "                                             
             // name
             + Name
             // body
